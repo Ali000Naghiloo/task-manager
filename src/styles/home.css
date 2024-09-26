@@ -1,0 +1,10 @@
+.dataCard {
+  min-height: 100px;
+  min-width: fit-content;
+}
+
+.taskCards {
+  width: 100%;
+  height: 220px;
+  max-height: 220px;
+}
