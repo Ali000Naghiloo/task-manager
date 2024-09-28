@@ -29,7 +29,11 @@ import { useForm } from 'react-hook-form';
 import Btn from '../../../components/Btn';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import BoardCol from './board/BoardCol';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  horizontalListSortingStrategy
+} from '@dnd-kit/sortable';
 
 export default function Boards() {
   const { main, board } = useSelector((state) => state);
@@ -70,7 +74,6 @@ export default function Boards() {
 
   const handleDeleteWorkFlowAnswerYes = asyncWrapper(async () => {
     const res = await serDeleteWorkFlow(workFlowItemDelete?.id);
-    console.log(res);
     if (res?.data?.code === 1) {
       handleWorkFlows();
       dispatch(RsetShowToast({ show: true, title: res?.data?.msg, bg: 'success' }));
@@ -137,7 +140,7 @@ export default function Boards() {
     <>
       <Container fluid className="count_WorkFlow d-flex gap-3 py-2 min_Height_100_board">
         {/* <div className="position-absolute top-0 end-0 w-100 h-30px"></div> */}
-        <DndContext onDragEnd={handleOnDragEnd}>
+        <DndContext onDragEnd={handleOnDragEnd} collisionDetection={closestCenter}>
           {/* <DndContext collisionDetection={closestCenter} onDragEnd={handleSortCol}> */}
           {allWorkFlow?.map((wf, wfIndex) => {
             return (
@@ -151,6 +154,7 @@ export default function Boards() {
                   wfIndex={wfIndex}
                   tasksList={tasksList?.filter((task) => task?.workFlow === wf?.id)}
                   setTaskList={setTasksList}
+                  setWorkFlowItemDelete={setWorkFlowItemDelete}
                   handleWorkFlows={handleWorkFlows}
                   handleAllTasks={handleAllTasks}
                 />

@@ -36,8 +36,6 @@ const CreateProjectModal = ({
   } = useForm({ reValidateMode: 'onChange' });
   const typeValue = watch('projectType');
 
-  console.log(main?.allUsers);
-
   const addUsersFilter = Object.values(main?.allUsers)?.map((item) => {
     console.log(item);
     return {
@@ -195,7 +193,7 @@ const CreateProjectModal = ({
                   control={control}
                   label="نوع:"
                 />
-                <Row className="mt-4">
+                {/* <Row className="mt-4">
                   {`سرعت پروژه: ${watch('projectType')?.id === 0 ? 0 : sprintNum || 0}`}
                   <Form.Label> </Form.Label>
                   <Form.Range
@@ -213,7 +211,7 @@ const CreateProjectModal = ({
                     //debug
                     range={0}
                   />
-                </Row>
+                </Row> */}
                 <Row>
                   {/* <Input
                     name="projectCreatorFullName"

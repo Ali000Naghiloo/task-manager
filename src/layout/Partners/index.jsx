@@ -8,19 +8,10 @@ const Partners = () => {
 
   const handleUserStatus = (status, userData = { last_seen: '2 ساعت پیش' }) => {
     if (status === 0) {
-      return { text: `آخرین بازدید ${userData?.last_seen}`, style: 'bg-dark opacity-75' };
+      // return { text: `آخرین بازدید ${userData?.last_seen}`, style: 'bg-dark opacity-75' };
+      return { text: `آفلاین`, style: 'bg-dark opacity-75' };
     } else if (status === 1) {
       return { text: 'آنلاین', style: 'bg-success' };
-    } else if (status === 2) {
-      return {
-        text: 'دور از کار',
-        style: 'bg-warning'
-      };
-    } else if (status === 3) {
-      return {
-        text: 'مزاحم نشوید',
-        style: 'bg-danger'
-      };
     } else {
       return { text: 'آنلاین', style: 'bg-success' };
     }
@@ -71,11 +62,7 @@ const Partners = () => {
     );
   });
 
-  return (
-    <div style={{ height: '500px' }} className="w-100 overflow-auto no_scroll">
-      {fixAllUsers}
-    </div>
-  );
+  return <div className="w-100 h-100 overflow-auto">{fixAllUsers}</div>;
 };
 
 export default Partners;

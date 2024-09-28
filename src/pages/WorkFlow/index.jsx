@@ -99,13 +99,13 @@ const CreateWorkFlow = ({
                 <Input
                   errors={errors}
                   validation={{
-                    required: 'لطفا نام بورد را وارد کنید',
+                    required: 'لطفا نام برد را وارد کنید',
                     minLength: {
                       message: 'نام کاربری باید بیشتر از 2 حرف باشد',
                       value: 2
                     }
                   }}
-                  maxLength={10}
+                  maxLength={30}
                   xl={6}
                   label="نام ستون:"
                   name="name"

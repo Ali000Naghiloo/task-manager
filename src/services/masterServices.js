@@ -52,12 +52,12 @@ export const serCreateBoardGet = (id) => {
   return axios.get(`${baseURL}api/BoardController/CreateBoard?projectid=${id}`);
 };
 
-// ایجاد بورد
+// ایجاد برد
 export const serCreateBoardPost = (postData) => {
   return axios.post(`${baseURL}api/BoardController/CreateBoard`, postData);
 };
 
-// دریافت تمامی بوردهای مخصوص کاربر
+// دریافت تمامی بردهای مخصوص کاربر
 export const serGetBoards = (postData) => {
   return axios.get(`${baseURL}api/BoardController/Boards?projectid=${postData}`);
 };
@@ -87,12 +87,12 @@ export const serPutEditWorkFlow = (postData) => {
   return axios.post(`${baseURL}api/WorkFlowController/EditWorkFlow`, postData);
 };
 
-// اضافه کردن یک ستون به بورد
+// اضافه کردن یک ستون به برد
 export const addNewWorkFlowToBoard = (postData) => {
   return axios.post(`${baseURL}api/WorkFlowController/AddNewWorkFlowToBoard`, postData);
 };
 
-// لیست تمامی ستون ها بورد
+// لیست تمامی ستون ها برد
 export const serTasks = (id) => {
   return axios.get(`${baseURL}api/TaskController/Tasks?boardid=${id}`);
 };
@@ -198,17 +198,34 @@ export const serSendMessage = (postData) => {
   return axios.post(`${baseURL}api/Report/BoardReports`, postData);
 };
 
-// گزارشات یک بورد
+// گزارشات یک برد
 export const serReportList = (boardId) => {
   return axios.get(`${baseURL}api/Report/BoardReports?boardid=${boardId}`);
 };
 
+// لیست وظایف کاربر
 export const serUserTasks = () => {
-  // لیست وظایف کاربر
   return axios.get(`${baseURL}api/Dashboard/UserTasks`);
 };
 
+// لیست پیام ها بین دو نفر
 export const serAllPvChats = (id) => {
-  // لیست وظایف کاربر
-  return axios.get(`${baseURL}/api/ChatMessage/AllMessages`, { params: { userid: id } });
+  return axios.get(`${baseURL}api/ChatMessage/AllMessages`, { params: { receiverId: id } });
+};
+
+// ارسال پیام
+export const serSendPvMessage = (body) => {
+  return axios.post(`${baseURL}api/ChatMessage/CreateMessages`, body);
+};
+
+// اطلاعات داشبرد
+export const serGetDashboardDetails = () => {
+  return axios.get(`${baseURL}api/Dashboard/ToDayAndDelayTasksNumber`);
+};
+
+// لیست کابران پروژه
+export const serGetProjectUsers = (projectId) => {
+  return axios.get(`${baseURL}api/ProjectController/ProjectUsers`, {
+    params: { projectId: projectId }
+  });
 };

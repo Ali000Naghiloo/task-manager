@@ -60,14 +60,14 @@ const EditBoardModal = ({ showEditBoardModal, setShowEditBoardModal }) => {
           className="d-flex bg-warning text-white justify-content-center"
           closeButton>
           <span style={{ transform: 'scale(-1, 1)' }} className="fw-bold">
-            ویرایش بورد
+            ویرایش برد
           </span>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Container fluid className="mb-3">
               <Row>
-                <Input name="name" xl={6} label="نام بورد:" control={control} />
+                <Input name="name" xl={6} label="نام برد:" control={control} />
                 <Row className="mt-4">
                   <SwitchCase
                     value={sprintNum}

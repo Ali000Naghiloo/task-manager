@@ -106,7 +106,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   if (size && size.width > 900) {
     return (
       <Collapse in={isOpen} dimension={'width'}>
-        <div className="bg-white overflow-y-auto sidebar">
+        <div className="bg-white overflow-y-auto no_scroll sidebar">
           <div style={{ maxWidth: '100%' }} className="w-100 p-2">
             <br />
 

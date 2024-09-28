@@ -1,47 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Container, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import moment from 'jalali-moment';
-import { imageUrl } from '../../services/masterServices';
+import { imageUrl, serGetDashboardDetails } from '../../services/masterServices';
 
 const Home = () => {
   const { main } = useSelector((state) => state);
   const usersList = useSelector((state) => state?.main?.users?.allUsers);
+  const [tasksDetails, setTaskDetails] = useState({ allTasks: 0, todayTasks: 0, delayedTasks: 0 });
 
   const m = moment().locale('fa');
 
   const myTaskList = [
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'my task', tasks: { all: 12, done: 10 } },
-    { title: 'test', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } }
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'my task', tasks: { all: 12, done: 10 } },
+    // { title: 'test', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } }
   ];
   const tasksToFollowUp = [
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } },
-    { title: 'تسک من', tasks: { all: 12, done: 10 } }
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } },
+    // { title: 'تسک من', tasks: { all: 12, done: 10 } }
   ];
 
   const currentFullDate = () => {
     return (
       <>
-        {m.format('dddd')} {m.format('d')} {m.format('MMMM')} {m.format('yyyy')}
+        {m.format('dddd')} {parseInt(m.format('d')) + 1} {m.format('MMMM')} {m.format('yyyy')}
       </>
     );
   };
 
-  useEffect(() => {}, [main]);
+  const handleGetDetails = async () => {
+    await serGetDashboardDetails()
+      .then((res) => {
+        const data = res.data;
+        setTaskDetails({
+          allTasks: data?.allTasksNumber,
+          delayedTasks: data?.delayTasksNumber,
+          todayTasks: data?.todayTasksNumber
+        });
+      })
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    handleGetDetails();
+  }, []);
 
   return (
     <>
@@ -87,7 +103,7 @@ const Home = () => {
                     <i className="d-flex align-items-center text-success bi bi-check-all p-2 font20 rounded-pill  bg-light" />
                   </span>
                   <div className="fw-bold my-2 justify-content-center d-flex col text-center">
-                    کارهای امروز من
+                    وظایف امروز من
                   </div>
                   <div className="fw-bold d-flex justify-content-center col text-center">0</div>
                 </div>
@@ -99,7 +115,7 @@ const Home = () => {
                     <i className="d-flex align-items-center text-success bi bi-calendar2-week p-2 font20 rounded-pill  bg-light" />
                   </span>
                   <div className=" fw-bold my-2 justify-content-center d-flex col text-center">
-                    کارهای دارای تاخیر
+                    وظایف دارای تاخیر
                   </div>
                   <div className="fw-bold d-flex justify-content-center col text-center">0</div>
                 </div>
@@ -111,7 +127,7 @@ const Home = () => {
                     <i className="d-flex align-items-center text-success bi bi-alarm p-2 font20 rounded-pill bg-light" />
                   </span>
                   <div className=" fw-bold my-2 justify-content-center d-flex col text-center">
-                    کارهای قبل از پیگیری
+                    تمام وظایف من
                   </div>
                   <div className="fw-bold d-flex justify-content-center col text-center">0</div>
                 </div>
@@ -142,7 +158,7 @@ const Home = () => {
                         </div>
                       ))
                     ) : (
-                      <span className="w-100 text-center fw-bold px-2 pt-4">
+                      <span className="w-100 text-center d-flex justify-content-center align-items-center fw-bold px-2 pt-4">
                         وظیفه ای برای شما وجود ندارد
                       </span>
                     )}
@@ -173,8 +189,8 @@ const Home = () => {
                         </div>
                       ))
                     ) : (
-                      <span className="w-100 text-center fw-bold px-2 pt-4">
-                        وظیفه ای برای شما وجود ندارد
+                      <span className="w-100 text-center d-flex justify-content-center align-items-center fw-bold px-2 pt-4">
+                        وظیفه ای برای پیگیری وجود ندارد
                       </span>
                     )}
                   </div>

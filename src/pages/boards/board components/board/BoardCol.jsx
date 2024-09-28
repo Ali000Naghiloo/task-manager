@@ -23,13 +23,13 @@ export default function BoardCol({
   tasksList,
   setTaskList,
   handleWorkFlows,
+  setWorkFlowItemDelete,
   handleAllTasks
 }) {
   const dispatch = useDispatch();
   const [showWorkFlow, setShowWorkFlow] = useState(false);
   const [workFlowItem, setWorkFlowItem] = useState({});
   const [workflowEditItem, setWorkflowEditItem] = useState({});
-  const [workFlowItemDelete, setWorkFlowItemDelete] = useState({});
   const [showCreateIssuesModal, setShowCreateIssuesModal] = useState(false);
   const [getEditTasks, setGetEditTasks] = useState({});
 
@@ -39,7 +39,8 @@ export default function BoardCol({
   });
   const dropStyle = {
     backgroundColor: droppable.isOver ? 'rgba(0,0,50,0.5)' : undefined,
-    overflow: droppable.isOver ? 'visible' : ''
+    overflow: droppable.isOver ? 'visible' : '',
+    zIndex: droppable.isOver ? '0' : ''
   };
 
   //handle sort col

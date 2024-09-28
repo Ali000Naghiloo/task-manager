@@ -7,10 +7,12 @@ export default function Chat() {
   const [selectedChat, setSelectedChat] = useState(null);
   const [usersList, setUsersList] = useState(null);
   const users = useSelector((state) => state.main?.allUsers);
+  const loggedInUser = useSelector((state) => state?.main);
 
   useEffect(() => {
-    if (users) {
-      setUsersList(users);
+    if (users && users?.length !== 0 && loggedInUser?.userRole?.id) {
+      let list = users?.filter((user) => user?.id !== loggedInUser?.userRole?.id);
+      setUsersList(list);
     }
   }, [users]);
 

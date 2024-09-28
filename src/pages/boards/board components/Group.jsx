@@ -18,9 +18,9 @@ import { useMediaQuery } from 'react-responsive';
 export default function Group() {
   const isSmallScreen = useMediaQuery({ query: '(max-width: 600px)' });
   const messagesList = [
-    { content: 'hdhdhd', userId: 1, name: 'علی جعفری', time: '12:00' },
-    { content: 'hdhdhd', userId: 2, name: 'علی جعفری', time: '12:00' },
-    { content: 'hdhdhd', userId: 1, name: 'علی جعفری', time: '12:00' }
+    // { content: 'hdhdhd', userId: 1, name: 'علی جعفری', time: '12:00' },
+    // { content: 'hdhdhd', userId: 2, name: 'علی جعفری', time: '12:00' },
+    // { content: 'hdhdhd', userId: 1, name: 'علی جعفری', time: '12:00' }
   ];
   const boardMessageInfo = useSelector((state) => state.board?.boardMessage);
   const dispatch = useDispatch();

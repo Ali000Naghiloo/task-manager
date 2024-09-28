@@ -13,6 +13,7 @@ import {
   serCreateBoardGet,
   serCreateBoardPost,
   serGetBoards,
+  serGetProjectUsers,
   serPutEditBoard,
   serWorkFlows
 } from '../../services/masterServices';
@@ -54,14 +55,21 @@ const CreateBoardModal = ({
         })
       : [];
 
-  const usersAssigned = (
-    editFiledsBoard?.boardUsersViewModel || editFiledsBoard?.projectAssignedUsersViewModel
-  )?.map((item) => {
-    return {
-      id: item?.userId,
-      title: item?.fullName
-    };
-  });
+  const [usersAssigned, setUsersAssigned] = useState();
+
+  const handleGetProjectUsers = async () => {
+    await serGetProjectUsers(editFiledsBoard?.projectId)
+      ?.then((res) => {
+        if (res.status === 200 && res.data?.code == 1) {
+          setUsersAssigned(
+            res.data?.data?.map((d) => {
+              return { id: d?.userName, title: d?.fullName };
+            })
+          );
+        }
+      })
+      .catch(() => {});
+  };
 
   const handleCreateBoard = asyncWrapper(async (data) => {
     dispatch(RsetShowLoading({ value: true }));
@@ -126,6 +134,7 @@ const CreateBoardModal = ({
 
   useEffect(() => {
     handleWorkFlows();
+    handleGetProjectUsers();
   }, []);
 
   useEffect(() => {
@@ -154,7 +163,7 @@ const CreateBoardModal = ({
           className="d-flex bg-warning text-white justify-content-center"
           closeButton>
           <span style={{ transform: 'scale(-1, 1)' }} className="fw-bold">
-            افزودن بورد
+            افزودن برد
           </span>
         </Modal.Header>
         <Modal.Body>
@@ -162,11 +171,11 @@ const CreateBoardModal = ({
             <Container fluid className="mb-3">
               <Row className="d-flex align-items-end">
                 <Input
-                  errmsg="لطفا نام بورد را وارد کنید"
+                  errmsg="لطفا نام برد را وارد کنید"
                   errors={errors}
                   name="boardName"
                   xl={4}
-                  label="نام بورد:"
+                  label="نام برد:"
                   control={control}
                 />
                 <ComboBox
@@ -178,7 +187,7 @@ const CreateBoardModal = ({
                 />
               </Row>
               <Row className="mt-4">
-                <SwitchCase
+                {/* <SwitchCase
                   disabled={editFiledsBoard?.projectType === 0 ? true : false}
                   min={0}
                   max={editFiledsBoard?.sprintNumber}
@@ -186,7 +195,7 @@ const CreateBoardModal = ({
                   name="sprintNumber"
                   range={0}
                   label={`سرعت پروژه:${watch('sprintNumber') || editFiledsBoard?.projectType}`}
-                />
+                /> */}
               </Row>
               <Row className="mt-4">
                 <ComboBox

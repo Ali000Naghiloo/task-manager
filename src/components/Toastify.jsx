@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Row, Toast } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { RsetShowToast } from '../hooks/slices/main';
+import { Flip, ToastContainer } from 'react-toastify';
 
 const Toastify = () => {
   const { main } = useSelector((state) => state);
@@ -40,6 +41,20 @@ const Toastify = () => {
           </Toast>
         </Col>
       </Row> */}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Flip}
+      />
     </>
   );
 };

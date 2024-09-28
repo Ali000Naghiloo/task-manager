@@ -143,9 +143,9 @@ const AllBoard = () => {
   const HeaderContent = () => {
     return (
       <div className="w-100 d-flex justify-content-between pe-3">
-        <Button onClick={handleCreateBoard}>اضافه کردن بورد جدید +</Button>
+        <Button onClick={handleCreateBoard}>اضافه کردن برد جدید +</Button>
 
-        <Form.Control placeholder="فیلتر عنوان بورد..." className="me-auto w-fit-content" />
+        <Form.Control placeholder="فیلتر عنوان برد..." className="me-auto w-fit-content" />
       </div>
     );
   };
@@ -172,7 +172,7 @@ const AllBoard = () => {
     <>
       <Container fluid className="w-100 m-0">
         <MainTitle
-          title={`لیست بورد های پروژه "${
+          title={`لیست برد های پروژه "${
             board?.getAllBoard?.[0]?.projectName ? board?.getAllBoard?.[0]?.projectName : ''
           }"`}
           Children={<HeaderContent />}
@@ -239,7 +239,7 @@ const AllBoard = () => {
                   </div>
 
                   <div className="eng_Num m-auto px-3 w-100">
-                    <span>وضعیت پیشرفت بورد :</span>
+                    <span>وضعیت پیشرفت برد :</span>
 
                     <ProgressBar
                       className="eng_Num bg-light"
@@ -291,7 +291,7 @@ const AllBoard = () => {
             onClick={handleCreateBoard}>
             <div className="h-100 flex flex-col justify-content-center align-items-center d-flex flex-column gap-2 py-3">
               <i className="cursorPointer d-flex align-items-center mx-1 font70 text-secondary bi bi-plus-circle" />
-              <span className="text-bold font18">بورد جدید</span>
+              <span className="text-bold font18">برد جدید</span>
             </div>
           </div>
         </div>
@@ -318,15 +318,3 @@ const AllBoard = () => {
 };
 
 export default AllBoard;
-
-{
-  /* <div className=" ">تاریخ ایجاد پروژه: {item?.createDateTime} </div>
-                <div className=" ">توضیحات: {item?.description} </div>
-                <div className=" ">تاریخ شروع: {item?.dueDateTime} </div>
-                <div className=" ">تاریخ پایان: {item?.endDateTime} </div>
-                <div className=" ">سازنده: {item?.projectCreatorFullName} </div>
-                <div className=" ">اولویت پروژه:{item?.projectPriority} </div>
-                <div className=" ">وضعیت پروژه:{item?.projectStatus} </div>
-                <div className=" ">نوع پروژه:{item?.projectType} </div>
-                <div className=" ">سرعت پروژه:{item?.sprintNumber} </div> */
-}

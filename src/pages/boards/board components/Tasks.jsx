@@ -126,7 +126,7 @@ export default function Tasks() {
           {/* empty view */}
           {!loading && !tasksList && (
             <div className="w-100 mt-5 d-flex justify-content-center align-items-center">
-              <span className="font20">وظیفه ای برای این بورد وجود ندارد</span>
+              <span className="font20">وظیفه ای برای این برد وجود ندارد</span>
             </div>
           )}
         </div>
