@@ -59,6 +59,7 @@ export default function BoardCol({
   });
 
   const handleDeleteWorkFlow = (workFlow) => {
+    console.log(workFlow);
     setWorkFlowItemDelete(workFlow);
     dispatch(RsetDeleteModal({ value: true, name: 'DELETE_WorkFlow' }));
   };
@@ -75,8 +76,8 @@ export default function BoardCol({
         ref={setNodeRef}
         className="tasks_col no_scroll scroll_Master overflow-y-scroll rounded-1 justify-content-center overflow-visible">
         <div
-          {...listeners}
-          {...attributes}
+          // {...listeners}
+          // {...attributes}
           ref={setActivatorNodeRef}
           style={{ backgroundColor: wfData?.color || 'blue', cursor: 'grab' }}
           xxl="12"
@@ -84,7 +85,9 @@ export default function BoardCol({
           <span>{wfData?.name}</span>
           <div className="d-flex gap-2">
             <i
-              onClick={() => handleEditWorkFlow(wfData)}
+              onClick={() => {
+                handleEditWorkFlow(wfData);
+              }}
               className="cursorPointer bi bi-sliders d-flex align-items-center"
             />
             <i

@@ -77,6 +77,10 @@ const CreateWorkFlow = ({
     }
   });
 
+  useEffect(() => {
+    console.log(showWorkFlow);
+  }, [showWorkFlow]);
+
   return (
     <>
       <Modal className="p-0" size="lg" show={showWorkFlow} onHide={() => setShowWorkFlow(false)}>

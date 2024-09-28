@@ -69,6 +69,7 @@ const TasksModal = ({
   const handleHideModal = () => {
     setValue('createComment', '');
     setValue('commentMentionUsersViewModels', []);
+    setAllSubTask([]);
     setShowTasksModal(false);
   };
 

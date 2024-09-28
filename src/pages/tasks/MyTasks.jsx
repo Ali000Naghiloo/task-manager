@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import asyncWrapper from '../../utils/asyncWrapper';
 import { useDispatch, useSelector } from 'react-redux';
-import { serGetSubTasks, serTasks } from '../../services/masterServices';
+import { serGetSubTasks, serTasks, serUserTasks } from '../../services/masterServices';
 import { RsetShowLoading } from '../../hooks/slices/main';
 import Loading from '../../components/Loading';
 import TasksModal from './TasksModal';
@@ -39,10 +39,11 @@ export default function MyTasks() {
   };
 
   const handleGetTasks = asyncWrapper(async () => {
-    const resTasks = await serTasks(location?.state?.item?.id);
+    dispatch(RsetShowLoading({ value: true }));
+    const resTasks = await serUserTasks();
     dispatch(RsetShowLoading({ value: false }));
     if (resTasks?.data?.code === 1) {
-      setTasksList(resTasks?.data?.data);
+      setTasksList(resTasks.data?.data);
     } else {
       setTasksList(null);
     }
@@ -112,7 +113,8 @@ export default function MyTasks() {
 
                     <div className="me-auto d-flex align-items-center gap-1 font12 border rounded p-1">
                       <i class="d-flex align-items-center bi bi-list-check"></i>
-                      {4}/{10}{' '}
+                      {task?.taskSubTasksViewModels?.filter((t) => t?.doneStatus)?.length}/
+                      {task?.taskSubTasksViewModels?.length}{' '}
                     </div>
 
                     <div className="d-flex justify-content-center align-items-center bg-dark-subtle w-30px h-30px rounded-pill">
@@ -123,6 +125,7 @@ export default function MyTasks() {
                 </div>
               ))
             : null}
+
           {/* empty view */}
           {!loading && !tasksList && (
             <div className="w-100 mt-5 d-flex justify-content-center align-items-center">

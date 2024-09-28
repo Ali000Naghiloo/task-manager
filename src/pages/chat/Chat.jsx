@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export default function Chat() {
   const [selectedChat, setSelectedChat] = useState(null);
-  const [usersList, setUsersList] = useState([]);
+  const [usersList, setUsersList] = useState(null);
   const users = useSelector((state) => state.main?.allUsers);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Chat() {
   return (
     <>
       <div className="d-flex max-w-100 h_100 flex rounded-2">
-        <UsersList users={usersList} setCurrentChat={setSelectedChat} />
+        <UsersList users={usersList} currentChat={selectedChat} setCurrentChat={setSelectedChat} />
 
         <CurrentChat currentUser={selectedChat} />
       </div>

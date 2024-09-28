@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { imageUrl } from '../../services/masterServices';
 
-export default function UsersList({ users }) {
+export default function UsersList({ users, currentChat, setCurrentChat }) {
   const handleRenderUsersList = () => {
     return (
       <>
         {users.map((user) => (
           <div
             key={user.id}
-            className="w-100 d-flex align-items-center gap-3 p-2 border-bottom hover-element cursorPointer">
+            onClick={() => {
+              setCurrentChat(user);
+            }}
+            className={`w-100 d-flex align-items-center gap-3 p-2 border-bottom hover-element cursorPointer ${currentChat === user ? 'bg-dark-subtle' : ''}`}>
             {/* profile image */}
             <div className="h-100">
               {user?.imagePath && user?.imagePath !== imageUrl ? (

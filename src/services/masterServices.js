@@ -202,3 +202,13 @@ export const serSendMessage = (postData) => {
 export const serReportList = (boardId) => {
   return axios.get(`${baseURL}api/Report/BoardReports?boardid=${boardId}`);
 };
+
+export const serUserTasks = () => {
+  // لیست وظایف کاربر
+  return axios.get(`${baseURL}api/Dashboard/UserTasks`);
+};
+
+export const serAllPvChats = (id) => {
+  // لیست وظایف کاربر
+  return axios.get(`${baseURL}/api/ChatMessage/AllMessages`, { params: { userid: id } });
+};
